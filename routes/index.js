@@ -12,6 +12,9 @@ router.get('/', function (req, res, next) {
 router.get('/movie-wishlist/movies/1.0/list/all', async function (req, res, next) {
   try {
     let result = await axios.get('https://movie-wishlist-60107.firebaseio.com/movies.json');
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
     res.json(result.data);
   } catch (error) {
     console.error(error);
