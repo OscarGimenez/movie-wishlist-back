@@ -9,13 +9,49 @@ router.get('/', function (req, res, next) {
   });
 });
 
-router.get('/movie-wishlist/movies/1.0/list/all', async function (req, res, next) {
+router.get('/movies/1.0/list/all', async function (req, res, next) {
   try {
     let result = await axios.get('https://movie-wishlist-60107.firebaseio.com/movies.json');
     //FIXME: Try to handle better this
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.json(result.data);
+  } catch (error) {
+    console.error(error);
+    res.json({
+      errorMsg: 'There was an error retrieving the movies'
+    });
+  }
+});
+
+router.post('/user-movies/1.0/add', async function (req, res, next) {
+  try {
+    data = {
+      username: req.body.username,
+      movieCode: req.body.movieCode
+    };
+
+    let result = await axios
+      .post("https://movie-wishlist-60107.firebaseio.com/wishlist.json", data);
+    //FIXME: Try to handle better this
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.json({
+      res: result
+    });
+  } catch (err) {
+    res.json({
+      err: err
+    });
+
+  }
+
+});
+
+router.post('/user-movies/1.0/remove', async function (req, res, next) {
+  try {
     res.json(result.data);
   } catch (error) {
     console.error(error);
