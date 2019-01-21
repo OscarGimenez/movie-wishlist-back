@@ -29,7 +29,7 @@ router.post('/user-movies/1.0/add', async function (req, res, next) {
   try {
     data = {
       username: req.body.username,
-      movieCode: req.body.movieCode
+      movie: req.body.movie
     };
 
     let result = await axios
