@@ -14,8 +14,7 @@ router.get('/', function (req, res, next) {
 
 router.get('/movies/1.0/list/all', async function (req, res, next) {
   try {
-    const url = properties.get('pro.db.query.allMovies');
-    // let result = await axios.get('https://movie-wishlist-60107.firebaseio.com/movies.json');
+    const url = properties.get('pro.db.query.movies');
     let result = await axios.get(url);
     //FIXME: Try to handle better this
     res.header('Access-Control-Allow-Origin', '*');
@@ -37,8 +36,8 @@ router.post('/user-movies/1.0/add', async function (req, res, next) {
       movie: req.body.movie
     };
 
-    let result = await axios
-      .post("https://movie-wishlist-60107.firebaseio.com/wishlist.json", data);
+    const url = properties.get('pro.db.query.wishlist');
+    let result = await axios.post(url, data);
     //FIXME: Try to handle better this
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -75,7 +74,8 @@ router.get('/user-movies/1.0/list/:user', async function (req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     let user = req.params.user;
-    let result = await axios.get(`https://movie-wishlist-60107.firebaseio.com/wishlist.json?orderBy="username"&equalTo="${user}"`);
+    const url = properties.get('pro.db.query.wishlist');
+    let result = await axios.get(url + `?orderBy="username"&equalTo="${user}"`);
     res.json(result.data);
   } catch (error) {
     console.error(error);
