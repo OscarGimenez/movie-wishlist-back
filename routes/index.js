@@ -3,7 +3,7 @@ const axios = require('axios');
 var router = express.Router();
 
 var PropertiesReader = require('properties-reader');
-var properties = PropertiesReader('../config/properties.ini');
+var properties = PropertiesReader('./config/properties.ini');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
 
 router.get('/movies/1.0/list/all', async function (req, res, next) {
   try {
-    const url = properties.get('some.db.query.allMovies');
+    const url = properties.get('pro.db.query.allMovies');
     // let result = await axios.get('https://movie-wishlist-60107.firebaseio.com/movies.json');
     let result = await axios.get(url);
     //FIXME: Try to handle better this
