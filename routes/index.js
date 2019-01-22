@@ -27,9 +27,9 @@ router.get('/movies/1.0/list/all', async function (req, res, next) {
     let db = admin.database();
     let ref = db.ref("movies");
     //FIXME: Try to handle better this
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    // res.header('Access-Control-Allow-Origin', '*');
+    // res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    // res.header('Access-Control-Allow-Headers', 'Content-Type');
     ref.once("value", function (snapshot) {
       result = snapshot.val();
       res.json(result);
