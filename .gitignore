@@ -6,7 +6,7 @@
 .pnp.js
 
 # properties
-/config
+# /config
 
 # testing
 /coverage
