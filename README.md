@@ -10,6 +10,9 @@ This app uses:
 - Handlebars
 - Firebase API
 
+### TODO:
+- [ ] API creation: Remove from wishlist
+
 # Installation
 Don't forget to `npm install` after clone this repo.
 
